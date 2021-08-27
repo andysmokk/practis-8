@@ -70,49 +70,46 @@ function closeModalEsc(e) {
   onCloseModalClick(e);
 }
 
-function changeImgArrow(e) {
-  if (e.code === 'ArrowRight' && activeImg < galleryItems.length - 1) {
-    refs.lightboxImg.src = galleryItems[(activeImg += 1)].original;
-    return;
-  }
-  if (e.code === 'ArrowLeft' && activeImg > 0) {
-    refs.lightboxImg.src = galleryItems[(activeImg -= 1)].original;
-    return;
-  }
-  if (e.code === 'ArrowRight' && activeImg === galleryItems.length - 1) {
-    activeImg = 0;
-    refs.lightboxImg.src = galleryItems[activeImg].original;
-    return;
-  }
-  if (e.code === 'ArrowLeft' && activeImg === 0) {
-    activeImg = galleryItems.length - 1;
-    refs.lightboxImg.src = galleryItems[activeImg].original;
-    return;
+function changeImgArrow({ key }) {
+  switch (key) {
+    case galleryItems.length - 1 > activeImg && 'ArrowRight':
+      activeImg += 1;
+      refs.lightboxImg.src = galleryItems[activeImg].original;
+      break;
+    case activeImg > 0 && 'ArrowLeft':
+      activeImg -= 1;
+      refs.lightboxImg.src = galleryItems[activeImg].original;
+      break;
+    case activeImg === galleryItems.length - 1 && 'ArrowRight':
+      activeImg = 0;
+      refs.lightboxImg.src = galleryItems[activeImg].original;
+      break;
+    case activeImg === 0 && 'ArrowLeft':
+      activeImg = galleryItems.length - 1;
+      refs.lightboxImg.src = galleryItems[activeImg].original;
+      break;
+    default:
+      alert('что-то пошло не так');
   }
 }
 
-// function keyboardManipulation({ key }) {
-//   switch (key) {
-//     case gallery.length - 1 > activeIndex && 'ArrowRight':
-//       activeIndex += 1;
-//       refs.modalImg.src = gallery[activeIndex].original;
-//       break;
-//     case activeIndex > 0 && 'ArrowLeft':
-//       activeIndex -= 1;
-//       refs.modalImg.src = gallery[activeIndex].original;
-//       break;
-//     case activeIndex === gallery.length - 1 && 'ArrowRight':
-//       activeIndex = 0;
-//       refs.modalImg.src = gallery[activeIndex].original;
-//       break;
-//     case activeIndex === 0 && 'ArrowLeft':
-//       activeIndex = gallery.length - 1;
-//       refs.modalImg.src = gallery[activeIndex].original;
-//       break;
-//     case 'Escape':
-//       closeModal();
-//       break;
-//     default:
-//       alert('что-то пошло не так');
+// function changeImgArrow(e) {
+//   if (e.code === 'ArrowRight' && activeImg < galleryItems.length - 1) {
+//     refs.lightboxImg.src = galleryItems[(activeImg += 1)].original;
+//     return;
+//   }
+//   if (e.code === 'ArrowLeft' && activeImg > 0) {
+//     refs.lightboxImg.src = galleryItems[(activeImg -= 1)].original;
+//     return;
+//   }
+//   if (e.code === 'ArrowRight' && activeImg === galleryItems.length - 1) {
+//     activeImg = 0;
+//     refs.lightboxImg.src = galleryItems[activeImg].original;
+//     return;
+//   }
+//   if (e.code === 'ArrowLeft' && activeImg === 0) {
+//     activeImg = galleryItems.length - 1;
+//     refs.lightboxImg.src = galleryItems[activeImg].original;
+//     return;
 //   }
 // }
